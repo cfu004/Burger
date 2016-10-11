@@ -1,33 +1,33 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var burger = require('../models/burger.js');
+var burger = require("../models/burger.js");
 
-router.get('/', function (req, res) {
-	res.redirect('/burgers');
+router.get('/', function(req, res)  {
+  res.redirect('/burgers');
 });
 
-router.get('/burgers', function (req, res) {
-	cat.all(function (data) {
-		var hbsObject = { burgers: data };
-		console.log(hbsObject);
-		res.render('index', hbsObject);
-	});
+router.get('/burgers', function(req, res) {
+
+  burger.selectAll(function(data) {
+    res.render('index',{burgers: data})
+  });
+
 });
 
-router.post('/burgers/create', function (req, res) {
-	cat.create(['name', 'sleepy'], [req.body.name, req.body.sleepy], function () {
-		res.redirect('/burgers');
-	});
+router.post('/burgers/create', function(req, res) {
+
+  burger.insertOne(req.body.burgerName, req.body.devoured, function() {
+    res.redirect('/burgers');
+  });
+
 });
 
-router.put('/cats/update/:id', function (req, res) {
-	var condition = 'id = ' + req.params.id;
+router.put('/burgers/update/devour/:id', function(req, res)  {
 
-	console.log('condition', condition);
+  burger.updateOne(req.params.id, function() {
+    res.redirect('/burgers');
+  });
 
-	cat.update({ sleepy: req.body.sleepy }, condition, function () {
-		res.redirect('/cats');
-	});
 });
 
 module.exports = router;

@@ -1,35 +1,65 @@
-<h1>AYCE Burgers</h1>
+{{!-- < Head Section > --}}
+<div class="header">
+  <h1 class="move-center">Eat Da Yummy Burger</h1>
+</div>
 
-<p>Manage Burgers with this app</p>
-<!-- this is index.handlebars -->
-<ul>
-  {{#each burgers}}
-  	<li>
-  		<p><span class="label">ID:</span> {{this.id}}</p>
-      <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+{{!-- < MAIN SECTION > --}}
+<div class="main">
 
-      {{!-- Form should send a delete command to the server --}}
-      <form action="/delete?_method=DELETE" method="POST">
-        <input type="hidden" name="id" value="{{this.id}}">
-        <button type="submit">Delete</button>
-      </form>
-
-      <a href="/burgers/{{this.id}}">Update this burger</a>
-  	</li>
-  {{/each}}
-</ul>
-
-<h2>Add a Burger</h2>
-
-{{!-- Form should send a post command to the server --}}
-
-<form action="/create" method="POST" class="create-form">
-
-  <div class="form-group">
-    <label for="auth">Burger:</label>
-    <input type="text" id="auth" name="author">
+  <div class="left move-center">
+    <h2>Delicious Burgers Available</h2>
+    {{#each burgers}}
+      {{#unless this.devoured}}
+        <div>
+          <h4>{{this.burger_name}}</h4>
+        </div>
+        <div>
+          <img src="/assets/img/burger.jpeg">
+        </div>
+        <div>
+          <form action="burgers/update/devour/{{this.id}}?_method=PUT" method="POST">
+            <button class="btn" type="submit">Eat Me!!</button>
+          </form>
+        </div>
+      {{/unless}}
+    {{/each}}
   </div>
 
+  <div class="right move-center">
+    <h2 class="text-center">Yummy Burgers Devoured</h2>
+    {{#each burgers}}
+      {{#if this.devoured}}
+        <div>
+          <h4>{{this.burger_name}}</h4>
+        </div>
+        <div>
+          <img src="/assets/img/burger.jpeg">
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
 
-  <button type="submit">Add Burger</button>
-</form>
+  <div class="new-burger move-center">
+    <h2>Add a New Burger</h2>
+    <div>
+      <form action="burgers/create" method="POST">
+        <div class="form-group">
+          <label for="bn">Burger Name : </label>
+          <input type="text" id="bn" name="burgerName">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="dchoice">Eaten?</label><br>
+          <input type="radio" name="devoured" value="0" checked>Not Devoured<br>
+          <input type="radio" name="devoured" value="1">Devoured<br><br>
+        </div>
+        <button class="newBurgerBtn" type="submit">Burger It!</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{{!-- < FOOTER SECTION > --}}
+<div class="footer">
+</div>
