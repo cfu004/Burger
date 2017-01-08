@@ -1,0 +1,6 @@
+# Burger
+
+Simple burger game utilizing MySQL, Node, Express, handlebars, and ORM. 
+
+Three different burgers in this app; each time a burger is consumed, corresponding column in MySQL would be changed through ORM.
+The app uses Node and MySQL to query and route data, and Handlebars to generate the HTML.

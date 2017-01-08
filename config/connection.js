@@ -10,7 +10,7 @@ module.exports = function()  {
         port: 3306,
         user: "root", //Your username
         password: "", //Your password
-        database: "burgers_db"
+        database: "burgers_db" //Your database
       });
 
       connection.connect(function(err) {
